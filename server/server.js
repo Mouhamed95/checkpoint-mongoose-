@@ -1,7 +1,8 @@
 const express = require('express');
 const cors= require("cors");
 const server = express();
-require('dotenv').config({path: "./config/.env"})
+require('dotenv').config()
+
 require('./config/db');
 const port = process.env.PORT || 4000
 
@@ -41,13 +42,13 @@ Mouhamed.save(function(err, data) {
         favoriteFoods: ['Thiou']
     }
   ]
-//   Blog.create(arrayOfPeople, (err, data) =>{
-//     if(err){
-//         console.error(err);
-//     }
-//     else
-//         console.log('Ajouté');
-// })
+  Blog.create(arrayOfPeople, (err, data) =>{
+    if(err){
+        console.error(err);
+    }
+    else
+        console.log('Ajouté');
+})
 
 //Use model.find() to Search Your Database
 Blog.find({name: 'Ibrahima'}, function(err, found) {
@@ -67,7 +68,7 @@ Blog.findOne({ favoriteFoods:'Mafe'}, function(err, found) {
     else
     console.log(found);
 
-  }  )
+  });
 
 //Use model.findById() to Search Your Database By _id
 Blog.findById( Blog.id, function (err, found) {
@@ -89,7 +90,7 @@ Blog.findById( Blog.id, function (err, found) {
         data.favoriteFoods.push('hamburger')
         data.save()
     }
-})  
+});  
 
 //Perform New Updates on a Document Using model.findOneAndUpdate()
 const findAndUpdate = (personName, done) => {
@@ -108,14 +109,14 @@ Blog.findByIdAndRemove("6372eeae245d6081aa207128",(error, deleted) =>{
     if (error){
         console.log(deleted)
     }
-})
+});
 //MongoDB and Mongoose - Delete Many Documents with model.remove()
 
 Blog.remove({age: {$gt:28}}, (error, data)=>{
  if (error){
     console.log(error)
  }
-})
+});
 
 //Chain Search Query Helpers to Narrow Search Results
 Blog.find({favoriteFoods: {$all: ['Mafe']}})
@@ -126,7 +127,7 @@ Blog.find({favoriteFoods: {$all: ['Mafe']}})
     if(error){
         console.log(data)
     }
-})
+});
 
 server.listen(port, function() {
     console.log('The server is running, ' +

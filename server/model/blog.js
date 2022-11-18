@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
-const Model = mongoose.model
+
 
 
 
@@ -12,4 +12,4 @@ const blogSchema = new Schema ({
     age : Number,
     favoriteFoods : [String]
 })
-module.exports = Model("Blog", blogSchema)
+module.exports = mongoose.model("Blog", blogSchema)
